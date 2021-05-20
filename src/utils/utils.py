@@ -141,6 +141,16 @@ def func_states(row,column):
     
     return tuple(dict_.values())
 
+def generate_col_unique(df,cols_encode):
+    col_unique = ''
+    suma       = ''
+    for i in cols_encode:
+        col_unique = col_unique + i + '_'
+        suma = suma + ', '+df[i]
+
+    df[col_unique] = suma
+    return col_unique
+
 def seed_everything(seed=42):
     '''
     Function to put a seed to every step and make code reproducible

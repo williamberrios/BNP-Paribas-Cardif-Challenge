@@ -21,7 +21,7 @@ class Roberta_Model(nn.Module):
         outputs = self.model(input_ids, attention_mask,output_hidden_states = True)
         if self.word_embedding == 'second_last':
             sent_embed   = outputs[2][-2]
-        elif self.word_embedding == 'last_four_layers'
+        elif self.word_embedding == 'last_four_layers':
             hidden_states = outputs[2]
             sent_embed    = torch.cat([hidden_states[i] for i in [-1,-2,-3,-4]],dim = -1)
         sent_embed   = torch.mean(sent_embed, dim=1)
@@ -35,15 +35,21 @@ class Roberta_Model(nn.Module):
         return out
     
 class XLMRoberta(nn.Module):
-    def __init__(self,pretrained_model,dropout = 0.1):
+    def __init__(self,pretrained_model,dropout = 0.1,word_embedding = 'second_last'):
         super(XLMRoberta, self).__init__()
         self.model = transformers.XLMRobertaModel.from_pretrained(pretrained_model)
-        self.dropout = nn.Dropout(p=0.1)
+        self.dropout = dropout
         self.last = nn.Linear(self.model.config.hidden_size,1)
-
+        self.word_embedding = word_embedding
+    
     def _embeddings(self,input_ids,attention_mask):
+        # Embedding from the second-to-last hidden layer
         outputs = self.model(input_ids, attention_mask,output_hidden_states = True)
-        sent_embed   = outputs[2][-2]
+        if self.word_embedding == 'second_last':
+            sent_embed   = outputs[2][-2]
+        elif self.word_embedding == 'last_four_layers':
+            hidden_states = outputs[2]
+            sent_embed    = torch.cat([hidden_states[i] for i in [-1,-2,-3,-4]],dim = -1)
         sent_embed   = torch.mean(sent_embed, dim=1)
         return sent_embed
     
