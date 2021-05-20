@@ -164,3 +164,17 @@ def seed_everything(seed=42):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
 
+    
+def process_aditives(x):
+    if type(x)!= str:
+        return x
+    
+    texto = ''
+    for additive in x.split(']  ['):
+        for element in additive.split('->'):
+            if not 'en:' in element:                
+                for r in [' ',']','[']:
+                    element = element.strip(r)                
+                texto+=element+','
+                break
+    return texto
