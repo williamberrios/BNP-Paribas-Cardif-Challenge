@@ -178,3 +178,38 @@ def process_aditives(x):
                 texto+=element+','
                 break
     return texto
+
+def post_processing(df):
+    lista1 = ['Baking', 'Broden', 'Cereales', 'Chocolat', 'Condiment-en-poudre',
+           'Flavoured-milk-drink', 'Frozen-corn-cobs', 'Frozen-vegetable-mix',
+           'Fruit-bar', 'Goat-milk', 'Kruidenpasta', 'Legumes-prepares', 'Matzos',
+           'Orange-juice-from-concentrate', 'Pancake-mix', 'Pancakes-and-waffles',
+           'Peaches-sliced-in-syrup', 'Peels', 'Pork-mince', 'Produits-laitiers',
+           'Roasted-and-ground-coffee', 'Senate-bean-soup', 'Soeppoeder',
+           'Soup-mixes', 'Spearmint-sugarfree-gum', 'Syrups', 'Vegetarische-kazen',
+           'de:Ab-1-jahr', 'de:Boissons', 'de:Braune-linsen',
+           'de:Fischfrikadellen', 'de:Fruchtsafte', 'de:Huhn',
+           'de:Kabeljaufitlets', 'de:Maultaschen', 'de:Salzsticks',
+           'es:Mariscos-congeladosvalencia', 'es:Pescado-congelado',
+           'es:Zumo-mediterraneo', 'fr:Allumettes', 'fr:Apero-sans-alcool',
+           'fr:Barres-de-regime', 'fr:Boissons-a-base-de-jus-de-fruits',
+           'fr:Chilis-con-carne', 'fr:Compotes-pommes-figue']
+
+    lista2 = ['Black-rice', 'Caviars', 'Chilli-sauce', 'Ciabatta', 'Cocktail-sauces',
+           'Corned-beef', 'Feuilletes-chevre-epinards', 'Fromage-au-lait-cru',
+           'Fromages', 'Frozen-asian-food', 'Garlic-bread', 'Macaroni',
+           'Olives-denoyautees', 'Raspberry-conserve', 'Rice-noodles', 'Stilton',
+           'Turkey-bacon', 'ar:Tahina', 'de:Brotbelag', 'de:Citronat',
+           'de:Geriebener-kase', 'de:Glasnudeln', 'de:Halvas', 'de:Lachsersatz',
+           'de:Lachsersatze', 'de:Spicies', 'el:Σαρδέλες-σε-φυτικό-λάδι',
+           'es:Dulce-de-leche', 'es:Huevos-de-pescados', 'es:Huiles',
+           'es:Pasteleria', 'es:Plato-preparado-precocinado', 'es:Substitutivo',
+           'fr:Aides-culinaires', 'fr:Anchoiade', 'fr:Assaisionnement-bouillon',
+           'fr:Bbiscuit', 'fr:Beignets', 'fr:Boissons-instantanees',
+           'fr:Bonbons-plantes', 'fr:Cancoillotte', 'fr:Chicoree',
+           'fr:Chips-de-banane', 'fr:Chocolat-noir-biologique',
+           'fr:Gauffrettes-au-miel', 'fr:Insectes', 'fr:Ktipiti',
+           'fr:Le-chenevis-designe-la-graine-de-chanvre',
+           'fr:Macedoine-de-legumes', 'fr:Mayonnaise-en-tube' ]
+    df.loc[df['main_category_en'].isin(lista1), 'target'] = df[df['main_category_en'].isin(lista1)]['target'] - 6
+    df.loc[df['main_category_en'].isin(lista2), 'target'] = df[df['main_category_en'].isin(lista2)]['target'] + 6

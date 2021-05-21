@@ -9,6 +9,7 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import balanced_accuracy_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
+from .utils import post_processing
 import pandas as pd
 import transformers
 
@@ -44,3 +45,13 @@ def get_embedding(data_loader, model, device):
             predictions = predictions.cpu()
             final_predictions.append(predictions)
     return np.vstack(final_predictions)
+
+def predict(df,models,features):
+    probs = 0
+    for i in models:
+        probs = probs + (i.predict(df[features]))
+        print('fin_predict')
+    y_test_pred = probs/5.0
+    df['target'] = y_test_pred
+    post_processing(df)
+    return df
