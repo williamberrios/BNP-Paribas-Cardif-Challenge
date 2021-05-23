@@ -1,3 +1,5 @@
-# BNP-LATAM-Datathon# BNP-Paribas
-# Correr en order los notebooks desde el 0 al 4
-# el notebook 4 es la inferencia
+# Data Science Challenge BNP Paribas Cardif:
+Description:
+
+Solution of the first place done by my team "Insight ML".
+We use a NLP transformer models and extraction of embeddings for predicting the nutrition level of several types of foods.
