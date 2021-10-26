@@ -24,7 +24,7 @@ Around 100 students from Chile, Colombia, Peru and Mexico competed in the Data S
 The amount of carbohydrates, protein, vitamins , provenance, type of packaging, place of production, ingredients as text, etc. Download data [here](https://drive.google.com/drive/folders/1zkY4LemQTTp23WtrIVcA5II_zoUwFmV2?usp=sharing)
 
 ## Solution
-All experiements we developed in Kfold validation.
+All experiements we developed in Kfold validation. See folder 02.Code/ 
 +  First we fine-tuned a [Roberta Transformer](https://arxiv.org/abs/1907.11692) only with concatenated text features.
 + After this we trained a lightgbm combining embeddings extracted from the transformer and numerical features.
 + Finally we ensemble kfold predictions for final submission.
